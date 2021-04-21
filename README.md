@@ -6,12 +6,32 @@
 
 ### User Stories
 
-- As a user I want to sign in/ sign up
-- As a user I want to sign in using my email Address and Password
-- As a user I want to search for jobs by company name
-- As a user I want to search for jobs by job title
-- As a user I want to be able to see experience level information with job title
+- As a user I want to sign up
+- As a user I want to sign in
+- As a user I want to change password
 - As a user I want to sign out
+- As a user I want to create a job with title, company, and experience_level POST /jobs
+- As a user I want to view the jobs i created GET /jobs
+- As a user I want to delete the jobs i created DELETE /jobs/:id
+- As a user I want to update a jobs title, company and experience_level PATCH /jobs/:id
+
+Job
+- title : string
+- company : string
+- experience_level : string
+- owner : reference to user
+
+Wireframes Logged Out View
+- sign up form
+- sign in form
+
+Wireframes Logged In View
+- sign out button
+- change password form
+- create job form with input fields for title, company, and experience_level
+- view my jobs button that will display the users jobs including their title, company, experience_level and ID
+- delete jobs form with input fields for ID
+- update job form with input fields for ID, title, company, and experience_level
 
 ### Wireframe
 
