@@ -32,12 +32,12 @@ const router = express.Router()
 router.get('/jobs', requireToken, (req, res, next) => {
     Jobs.find()
       .then(jobs => {
-        // `examples` will be an array of Mongoose documents
+        // `jobs` will be an array of Mongoose documents
         // we want to convert each one to a POJO, so we use `.map` to
         // apply `.toObject` to each one
         return jobs.map(job => job.toObject())
       })
-      // respond with status 200 and JSON of the examples
+      // respond with status 200 and JSON of the jobs
       .then(jobs => res.status(200).json({ jobs: jobs }))
       // if an error occurs, pass it to the handler
       .catch(next)
