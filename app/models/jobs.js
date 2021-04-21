@@ -15,7 +15,9 @@ const jobSchema = new mongoose.Schema({
     required: true
   }, 
   owner: {
-      ref: 'User'
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   }
   }, {
     timestamps: true,
