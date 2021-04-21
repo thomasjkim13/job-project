@@ -12,8 +12,12 @@
 - As a user I want to sign out
 
 ### Wireframe
-
+![image](/Users/thomaskim/Desktop/sei/projects/job-resource/app/images/Sign-In.png)
+![image](/Users/thomaskim/Desktop/sei/projects/job-resource/app/images/Sign-Up.png)
+![image](/Users/thomaskim/Desktop/sei/projects/job-resource/app/images/Searchbycompany.png)
+![image](/Users/thomaskim/Desktop/sei/projects/job-resource/app/images/searchbytitle.png)
+![image](/Users/thomaskim/Desktop/sei/projects/job-resource/app/images/Createpost.png)
 
 ### ERD
-
+![image](/Users/thomaskim/Desktop/sei/projects/job-resource/app/images/one-to-many.png)
 
