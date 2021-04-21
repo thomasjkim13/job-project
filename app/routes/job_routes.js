@@ -17,6 +17,7 @@ const BadParamsError = errors.BadParamsError
 const BadCredentialsError = errors.BadCredentialsError
 
 const Job = require('../models/jobs')
+const jobs = require('../models/jobs')
 
 // passing this as a second argument to `router.<verb>` will make it
 // so that a token MUST be passed for that route to be available
@@ -28,13 +29,18 @@ const router = express.Router()
 
 // Create job
 // POST
-router.post('/create', (req, res, next) => {
-    const jobData = req.body.jobs
-    jobData.owner = req.user.id
-    Job.create(jobData)
-        .then(job => res.status(201).json({ job }))
-        .catch(next) 
-})
+router.post('/jobs', requireToken, (req, res, next) => {
+    // set owner of new example to be current user
+    req.body.jobs.owner = req.user.id
+    jobs.create(req.body.jobs)
+      .then(job => {
+        res.status(201).json({ job: job.toObject() })
+      })
+      // if an error occurs, pass it off to our error handler
+      // the error handler needs the error message and the `res` object so that it
+      // can send an error message back to the client
+      .catch(next)
+  })
 
 
 

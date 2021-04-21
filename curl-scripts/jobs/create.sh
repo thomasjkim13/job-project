@@ -1,7 +1,7 @@
 #!/bin/bash
 
 API="http://localhost:4741"
-URL_PATH="/create"
+URL_PATH="/jobs"
 
 curl "${API}${URL_PATH}" \
   --include \
@@ -12,7 +12,7 @@ curl "${API}${URL_PATH}" \
     "jobs": {
       "title": "'"${TITLE}"'",
       "company": "'"${COMPANY}"'",
-      "experience_level": "'"${LEVEL}"'"
+      "experienceLevel": "'"${LEVEL}"'"
     }
   }'
 
