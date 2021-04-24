@@ -72,7 +72,8 @@ router.patch('/jobs/:id', requireToken, removeBlanks, (req, res, next) => {
       .catch(next)
   })
 
-  // Delete
+  // Destroy
+  // 
   router.delete('/jobs/:id', requireToken, (req, res, next) => {
     Job.findById(req.params.id)
       .then(handle404)
