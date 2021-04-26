@@ -1,6 +1,6 @@
 #!/bin/sh
 
-API="https://frozen-brook-18979.herokuapp.com"
+API="http://localhost:4741"
 URL_PATH="/jobs"
 
 curl "${API}${URL_PATH}" \
