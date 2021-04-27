@@ -1,6 +1,6 @@
 #!/bin/bash
 
-API="http://localhost:4741"
+API="https://frozen-brook-18979.herokuapp.com"
 URL_PATH="/jobs"
 
 curl "${API}${URL_PATH}" \
@@ -12,7 +12,7 @@ curl "${API}${URL_PATH}" \
     "job": {
       "title": "'"${TITLE}"'",
       "company": "'"${COMPANY}"'",
-      "experienceLevel": "'"${LEVEL}"'"
+      "level": "'"${LEVEL}"'"
     }
   }'
 

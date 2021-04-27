@@ -52,10 +52,10 @@ router.post('/jobs', requireToken, (req, res, next) => {
       .then(job => {
         res.status(201).json({ job: job.toObject() })
       })
+      .catch(next)
       // if an error occurs, pass it off to our error handler
       // the error handler needs the error message and the `res` object so that it
       // can send an error message back to the client
-      .catch(next)
   })
 
 // UPDATE
