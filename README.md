@@ -15,12 +15,6 @@
 - As a user I want to delete the jobs i created DELETE /jobs/:id
 - As a user I want to update a jobs title, company and experience_level PATCH /jobs/:id
 
-Job
-- title : string
-- company : string
-- experience_level : string
-- owner : reference to user
-
 Technologies Used
 - jQuery
 - Javascript
@@ -28,6 +22,12 @@ Technologies Used
 - Bootstrap
 - Heroku
 - MongoDB
+
+Job
+- title : string
+- company : string
+- experience_level : string
+- owner : reference to user
 
 Wireframes Logged Out View
 - sign up form
