@@ -21,6 +21,14 @@ Job
 - experience_level : string
 - owner : reference to user
 
+Technologies Used
+- jQuery
+- Javascript
+- HTML/CSS
+- Bootstrap
+- Heroku
+- MongoDB
+
 Wireframes Logged Out View
 - sign up form
 - sign in form
