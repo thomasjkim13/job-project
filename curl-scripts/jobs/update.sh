@@ -12,7 +12,7 @@ curl "${API}${URL_PATH}/${ID}" \
     "job": {
       "title": "'"${TITLE}"'",
       "company": "'"${COMPANY}"'",
-      "experienceLevel": "'"${LEVEL}"'"
+      "level": "'"${LEVEL}"'"
     }
   }'
 
