@@ -1,7 +1,7 @@
 API='https://frozen-brook-18979.herokuapp.com/comments'
 URL_PATH='/comments'
 
-curl "${API}${URL_PATH}" \
+curl "${API}${URL_PATH}/${ID}" \
   --include \
   --request POST \
   --header "Content-Type: application/json" \
