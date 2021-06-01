@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const commentSchema = require('./comment.js')
+const commentSchema = require('./comment')
 
 const jobSchema = new mongoose.Schema({
   title: {
