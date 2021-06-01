@@ -8,7 +8,6 @@ curl "${API}${URL_PATH}/${COMMENT_ID}" \
   --header "Authorization: Bearer ${TOKEN}" \
   --data '{
     "comment": {
-      "title": "'"${TITLE}"'",
       "content": "'"${CONTENT}"'",
       "jobId": "'"${JOB_ID}"'"
     }
