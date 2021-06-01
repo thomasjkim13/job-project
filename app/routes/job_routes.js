@@ -30,63 +30,63 @@ const router = express.Router()
 // INDEX
 // GET /jobs
 router.get('/jobs', requireToken, (req, res, next) => {
-    Job.find()
-      .then(job => {
-        // `jobs` will be an array of Mongoose documents
-        // we want to convert each one to a POJO, so we use `.map` to
-        // apply `.toObject` to each one
-        return job.map(job => job.toObject())
-      })
-      // respond with status 200 and JSON of the jobs
-      .then(jobs => res.status(200).json({ jobs: jobs }))
-      // if an error occurs, pass it to the handler
-      .catch(next)
-  })
+  Job.find()
+    .then(job => {
+      // `jobs` will be an array of Mongoose documents
+      // we want to convert each one to a POJO, so we use `.map` to
+      // apply `.toObject` to each one
+      return job.map(job => job.toObject())
+    })
+    // respond with status 200 and JSON of the jobs
+    .then(jobs => res.status(200).json({ jobs: jobs }))
+    // if an error occurs, pass it to the handler
+    .catch(next)
+})
 
 // Create job
 // POST
 router.post('/jobs', requireToken, (req, res, next) => {
-    // set owner of new example to be current user
-    req.body.job.owner = req.user.id
-    Job.create(req.body.job)
-      .then(job => {
-        res.status(201).json({ job: job.toObject() })
-      })
-      .catch(next)
-      // if an error occurs, pass it off to our error handler
-      // the error handler needs the error message and the `res` object so that it
-      // can send an error message back to the client
-  })
+  // set owner of new example to be current user
+  req.body.job.owner = req.user.id
+  Job.create(req.body.job)
+    .then(job => {
+      res.status(201).json({ job: job.toObject() })
+    })
+    .catch(next)
+    // if an error occurs, pass it off to our error handler
+    // the error handler needs the error message and the `res` object so that it
+    // can send an error message back to the client
+})
 
 // UPDATE
 // PATCH /jobs/5a7db6c74d55bc51bdf39793
 router.patch('/jobs/:id', requireToken, removeBlanks, (req, res, next) => {
-    delete req.body.job.owner
-    Job.findById(req.params.id)
-      .then(handle404)
-      .then(job => {
-        requireOwnership(req, job)
-        return job.updateOne(req.body.job)
-      })
-      .then(() => res.sendStatus(204))
-      .catch(next)
-  })
+  delete req.body.job.owner
+  Job.findById(req.params.id)
+    .then(handle404)
+    .then(job => {
+      requireOwnership(req, job)
+      return job.updateOne(req.body.job)
+    })
+    .then(() => res.sendStatus(204))
+    .catch(next)
+})
 
-  // Destroy
-  // 
-  router.delete('/jobs/:id', requireToken, (req, res, next) => {
-    Job.findById(req.params.id)
-      .then(handle404)
-      .then(job => {
-        // throw an error if current user doesn't own `job`
-        requireOwnership(req, job)
-        // delete the job ONLY IF the above didn't throw
-        job.deleteOne()
-      })
-      // send back 204 and no content if the deletion succeeded
-      .then(() => res.sendStatus(204))
-      // if an error occurs, pass it to the handler
-      .catch(next)
-  })
+// Destroy
+//
+router.delete('/jobs/:id', requireToken, (req, res, next) => {
+  Job.findById(req.params.id)
+    .then(handle404)
+    .then(job => {
+      // throw an error if current user doesn't own `job`
+      requireOwnership(req, job)
+      // delete the job ONLY IF the above didn't throw
+      job.deleteOne()
+    })
+    // send back 204 and no content if the deletion succeeded
+    .then(() => res.sendStatus(204))
+    // if an error occurs, pass it to the handler
+    .catch(next)
+})
 
 module.exports = router
