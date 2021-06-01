@@ -70,4 +70,27 @@ router.delete('/comments/:commentId', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+router.patch('/comments/:commentId', (req, res, next) => {
+  const commentId = req.params.commentId
+  // extract the comment data from our request's body
+  const commentData = req.body.comment
+  const jobId = commentData.jobId
+
+  Job.findById(jobId)
+    .then(handle404)
+    .then(job => {
+      // select the comment with the id  `commentId`
+      const comment = job.comments.id(commentId)
+
+      // update our comment, with the request's data (commentData)
+      comment.set(commentData)
+
+      // save our changes, by saving the job
+      return job.save()
+    })
+    .then(() => res.sendStatus(204))
+    // .then(job => res.json({ job }))
+    .catch(next)
+})
+
 module.exports = router

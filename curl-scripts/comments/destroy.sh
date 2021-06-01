@@ -11,3 +11,5 @@ curl "${API}${URL_PATH}/${COMMENT_ID}" \
       "jobId": "'"${JOB_ID}"'"
     }
   }'
+
+echo
