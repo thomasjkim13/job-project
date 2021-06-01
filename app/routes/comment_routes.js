@@ -28,23 +28,23 @@ const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
 
 // CREATE
-// POST /comments
-router.post('/comments/:id', requireToken, (req, res, next) => {
-  // set owner of new animal to be current user
+// POST /comments/
+router.post('/comments', requireToken, (req, res, next) => {
+  // get the comment data from the body of the request
   const commentData = req.body.comment
-  // console.log(req.body.comments)
-  commentData.owner = req.user.id
-  // console.log(req.params.id)
-
-  Job.findById(req.params.id)
+  // get the job id from the body
+  const jobId = commentData.jobId
+  // find the job by its id
+  Job.findById(jobId)
     .then(handle404)
-    // respond to succesful `create` with status 201 and JSON of new "example"
     .then(job => {
+      // add comment to job
       job.comments.push(commentData)
-      return job.save() // save the updated job with its new comment
+      // save restaurant
+      return job.save()
     })
-    .then(job => res.status(201).json({ job: job.toObject() }))
-
+    // send responsne back to client
+    .then(job => res.status(201).json({ job }))
     .catch(next)
 })
 
