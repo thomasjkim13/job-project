@@ -1,19 +1,16 @@
+'use strict'
+// require the mongoose library
 const mongoose = require('mongoose')
-
-const reviewSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  content: {
-    type: String,
+const Schema = mongoose.Schema
+const commentSchema = new Schema({
+  body: String,
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
     required: true
   }
-},
-{
+}, {
   timestamps: true
 })
-
-// export the reviewSchema so that we can require it in `restaurant.js`
-// to create our subdocument relationship
-module.exports = reviewSchema
+// export the SCHEMA, do not convert to model
+module.exports = commentSchema

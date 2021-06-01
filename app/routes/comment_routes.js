@@ -29,29 +29,22 @@ const router = express.Router()
 
 // CREATE
 // POST /comments
-router.post('/comments', (req, res, next) => {
-  // extract the review from the request's data (body)
-  const commentData = req.body.comment
+router.post('/comments', requireToken, (req, res, next) => {
+  // set owner of new animal to be current user
+  const commentData = req.body.comments
+  // console.log(req.body.comments)
+  commentData.owner = req.user.id
+  // console.log(req.params.id)
 
-  // extracting the restaurantId from the review data
-  const jobId = commentData.jobId
-
-  // find the Job by its id
-  Job.findById(jobId)
-    // if there isn't a restaurant for the id we are searching
-    // for, cause a 404 not found error to occur
+  Job.findById(req.params.id)
     .then(handle404)
+    // respond to succesful `create` with status 201 and JSON of new "example"
     .then(job => {
-      // Create a new review in the `reviews` subdocument array
-      // using the request's reviewData
       job.comments.push(commentData)
-
-      // save the restaurant (which saves the new review)
-      return job.save()
+      return job.save() // save the updated job with its new comment
     })
-    // responding with the updated restaurant that includes
-    // our new review
-    .then(job => res.status(201).json({ job }))
+    .then(job => res.status(201).json({ job: job.toObject() }))
+
     .catch(next)
 })
 
