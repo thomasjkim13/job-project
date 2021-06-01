@@ -48,4 +48,26 @@ router.post('/comments', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+router.delete('/comments/:commentId', requireToken, (req, res, next) => {
+  // extract the comment's id from the url
+  const commentId = req.params.commentId
+
+  // extracting the job's id from the incoming request's data
+  const jobId = req.body.comment.jobId
+
+  Job.findById(jobId)
+    .then(handle404)
+    .then(job => {
+      // select the comment subdocument with the id `commentId` (job.comments.id(commentId))
+      // then remove it (delete it)
+      job.comments.id(commentId).remove()
+
+      // save our deletion
+      return job.save()
+    })
+    // if successfully deleted, respond with 204 No Content
+    .then(() => res.sendStatus(204))
+    .catch(next)
+})
+
 module.exports = router

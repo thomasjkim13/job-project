@@ -1,6 +1,6 @@
 # API='http://localhost:4741'
-API='https://frozen-brook-18979.herokuapp.com'
-URL_PATH='/comments'
+API="https://frozen-brook-18979.herokuapp.com"
+URL_PATH="/comments"
 
 curl "${API}${URL_PATH}" \
   --include \
@@ -10,7 +10,7 @@ curl "${API}${URL_PATH}" \
   --data '{
     "comment": {
       "title": "'"${TITLE}"'",
-      "content": "'"${CONTENT}"'"
+      "content": "'"${CONTENT}"'",
       "jobId": "'"${JOB_ID}"'"
     }
   }'
