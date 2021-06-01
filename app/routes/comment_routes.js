@@ -29,7 +29,7 @@ const router = express.Router()
 
 // CREATE
 // POST /comments
-router.post('/comments', requireToken, (req, res, next) => {
+router.post('/comments/:id', requireToken, (req, res, next) => {
   // set owner of new animal to be current user
   const commentData = req.body.comments
   // console.log(req.body.comments)
