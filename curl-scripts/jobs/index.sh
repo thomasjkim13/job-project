@@ -1,6 +1,6 @@
 #!/bin/sh
 
-API="https://frozen-brook-18979.herokuapp.com"
+API="https://tranquil-mountain-66305.herokuapp.com"
 URL_PATH="/jobs"
 
 curl "${API}${URL_PATH}" \
